@@ -47,7 +47,7 @@ style="LEFT: 0px; POSITION: absolute; TOP: 0px; BACKGROUND-COLOR: #0066ff"></DIV
                 <TD style="HEIGHT: 28px" width=150><INPUT id=txtName 
                   style="WIDTH: 130px" name="user_code"></TD>
                 <TD style="HEIGHT: 28px" width=370><SPAN 
-                  id="RequiredFieldValidator
+                  id=RequiredFieldValidator3 
                   style="FONT-WEIGHT: bold; VISIBILITY: hidden; COLOR: white">请输入登录名</SPAN></TD></TR>
               <TR>
                 <TD style="HEIGHT: 28px">登录密码：</TD>
