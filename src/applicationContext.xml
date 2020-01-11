@@ -22,4 +22,16 @@
         <property name="user" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
     </bean>
+
+
+<!--    配置dao-->
+    <bean id="userDao" class="com.itheima.crm.dao.impl.UserDaoImpl"></bean>
+<!--    配置service-->
+    <bean id="userService" class="com.itheima.crm.service.impl.UserServiceImpl">
+
+    </bean>
+<!--    配置action-->
+    <bean id="userAction" class="com.itheima.crm.web.action.UserAction" scope="prototype">
+
+    </bean>
 </beans>
