@@ -5,4 +5,10 @@
         "http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
+    <constant name="struts.action.extension" value="action"/>
+    <package name="crm" extends="struts-default" namespace="/">
+        <action name="user_*" class="userAction" method="{1}">
+            <result name="login">login.jsp</result>
+        </action>
+    </package>
 </struts>
