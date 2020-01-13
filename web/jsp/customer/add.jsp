@@ -8,7 +8,19 @@
 <LINK href="${pageContext.request.contextPath }/css/Style.css" type=text/css rel=stylesheet>
 <LINK href="${pageContext.request.contextPath }/css/Manage.css" type=text/css
 	rel=stylesheet>
-
+	<script src="${pageContext.request.contextPath}/js/jquery-1.11.3.min.js"/>
+	<script type="text/javascript">
+		$(function () {
+			// 页面一加载，函数就会执行
+			//只要页面一加载，就应该异步去查询字典的数据
+			//加载客户来源
+			$.post(
+					"${pageContext.request.contextPath}/baseDict_findByTypeCode.action",{"dict_type_code":"002"},function (data) {
+						alert("qunide");
+					}
+			);
+		});
+	</script>
 
 <META content="MSHTML 6.00.2900.3492" name=GENERATOR>
 </HEAD>
