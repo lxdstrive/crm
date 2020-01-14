@@ -58,9 +58,11 @@ CREATE TABLE `cst_customer` (
   CONSTRAINT `FK_cst_customer_0003` FOREIGN KEY (`cust_level`) REFERENCES `base_dict` (`dict_id`),
   CONSTRAINT `FKeh5g36duab8g1h051pdjfwcgd` FOREIGN KEY (`cust_source`) REFERENCES `base_dict` (`dict_id`),
   CONSTRAINT `FKrty52nvbjg1echf0se39eng49` FOREIGN KEY (`cust_level`) REFERENCES `base_dict` (`dict_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 /*Data for the table `cst_customer` */
+
+insert  into `cst_customer`(`cust_id`,`cust_name`,`cust_source`,`cust_industry`,`cust_level`,`cust_phone`,`cust_mobile`) values (1,'侯亚敏','6','1','22','15626','2542266'),(2,'小红','6','2','22','12124','1254'),(3,'小绿','6','2','23','12423','35214424'),(4,'小芳','6','2','23','3543635','32453245'),(5,'张爱霞','7','3','23','23521','54634'),(6,'神兽','7','3','23','3235234','43263245'),(7,'是德国','6','3','22','334234','2345234');
 
 /*Table structure for table `sys_user` */
 
