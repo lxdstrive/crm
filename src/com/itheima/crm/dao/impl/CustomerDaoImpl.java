@@ -70,4 +70,13 @@ public class CustomerDaoImpl extends HibernateDaoSupport implements CustomerDao 
     public void delete(Customer customer) {
         this.getHibernateTemplate().delete(customer);
     }
+
+    /**
+     * 修改客户
+     * @param customer
+     */
+    @Override
+    public void update(Customer customer) {
+        this.getHibernateTemplate().update(customer);
+    }
 }

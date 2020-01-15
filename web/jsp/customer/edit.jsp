@@ -1,10 +1,10 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8" %>
-<%@taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<TITLE>修改客户</TITLE>
+	<TITLE>添加客户</TITLE>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<LINK href="${pageContext.request.contextPath }/css/Style.css" type=text/css rel=stylesheet>
 	<LINK href="${pageContext.request.contextPath }/css/Manage.css" type=text/css
@@ -24,7 +24,7 @@
 						$(data).each(function (i, n) {
 							$("#cust_source").append("<option value='" + n.dict_id + "'>" + n.dict_item_name + "</option>");
 						});
-					$("#cust_source option [value = '${baseDictSource.dict_id}']").prop("selected","selected");
+						$("#cust_source option[value='${model.baseDictSource.dict_id}']").prop("selected","selected");
 					}, "json"
 			);
 			$.post(
@@ -35,7 +35,7 @@
 						$(data).each(function (i, n) {
 							$("#cust_level").append("<option value='" + n.dict_id + "'>" + n.dict_item_name + "</option>");
 						});
-						$(" #cust_level option[value='${baseDictLevel.dict_id}'] ").prop("selected","selected");
+						$("#cust_level option[value='${model.baseDictLevel.dict_id}']").prop("selected","selected");
 					}, "json"
 			);
 			$.post(
@@ -46,7 +46,7 @@
 						$(data).each(function (i, n) {
 							$("#cust_industry").append("<option value='" + n.dict_id + "'>" + n.dict_item_name + "</option>");
 						});
-						$("#cust_industry option [value = '${baseDictIndustry.dict_id}']").prop("selected","selected");
+						$("#cust_industry option[value='${model.baseDictIndustry.dict_id}']").prop("selected","selected");
 					}, "json"
 			);
 		});
@@ -55,11 +55,9 @@
 </HEAD>
 
 <BODY>
-<s:actionerror/>
-<s:fielderror/>
-<s:form id="form1" name="form1" action=""
-		method="post" enctype="multipart/form-data" theme="simple">
-
+<s:form name="form1" id="form1" action="customer_update.action" namespace="/" method="POST" enctype="multipart/form-data" theme="simple">
+	<s:hidden name="cust_id" value="%{model.cust_id}"/>
+	<s:hidden name="cust_image" value="%{model.cust_image}"/>
 	<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
 		<TBODY>
 		<TR>
@@ -80,7 +78,7 @@
 			<TD vAlign=top width="100%" bgColor=#ffffff>
 				<TABLE cellSpacing=0 cellPadding=5 width="100%" border=0>
 					<TR>
-						<TD class=manageHead>当前位置：客户管理 &gt; 修改客户</TD>
+						<TD class=manageHead>当前位置：客户管理 &gt; 添加客户</TD>
 					</TR>
 					<TR>
 						<TD height=2></TD>
@@ -93,8 +91,8 @@
 					<TR>
 						<td>客户名称：</td>
 						<td>
-							<s:textfield name="cust_name" class="textbox" id="sChannel2" style="WIDTH: 180px" maxLength="50"
-										 value="%{model.cust_phone}"	 />
+							<s:textfield cssClass="textbox" cssStyle="WIDTH: 180px" maxLength="50"
+							name="cust_name" value="%{model.cust_name}"/>
 							<%--<INPUT class=textbox id=sChannel2
 								   style="WIDTH: 180px" maxLength=50 name="cust_name">--%>
 						</td>
@@ -126,16 +124,15 @@
 					<TR>
 						<td>固定电话 ：</td>
 						<td>
-							<s:textfield name="cust_phone" class="textbox" id="sChannel2" style="WIDTH: 180px" maxLength="50"
-										 value="%{model.cust_phone}"	/>
+							<s:textfield cssClass="textbox" cssStyle="width: 180px" maxLength="50" name="cust_phone"
+							value="%{model.cust_phone}"/>
 							<%--<INPUT class=textbox id=sChannel2
 								   style="WIDTH: 180px" maxLength=50 name="cust_phone">--%>
 						</td>
 						<td>移动电话 ：</td>
 						<td>
-							<s:textfield name="cust_mobile" class="textbox" id="sChannel2" style="WIDTH: 180px" maxLength="50"
-										 value="%{model.cust_mobile}"
-							/>
+							<s:textfield cssClass="textbox" cssStyle="width: 180px" maxLength="50" name="cust_mobile"
+										 value="%{model.cust_mobile}"/>
 							<%--<INPUT class=textbox id=sChannel2
 								   style="WIDTH: 180px" maxLength=50 name="cust_mobile">--%>
 						</td>
@@ -143,7 +140,7 @@
 					<TR>
 						<td>客户资质 ：</td>
 						<td colspan="3">
-							<input type="file" name="upload"/>
+							<input type="file" name="upload">
 						</td>
 					</TR>
 
@@ -175,6 +172,6 @@
 		</TR>
 		</TBODY>
 	</TABLE>
-</s:form>
+	</s:form>
 </BODY>
 </HTML>
