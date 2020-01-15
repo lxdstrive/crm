@@ -12,6 +12,7 @@
 <!--        <property name="cust_industry" column="cust_industry"/>-->
         <property name="cust_phone" column="cust_phone"/>
         <property name="cust_mobile" column="cust_mobile"/>
+        <property name="cust_image" column="cust_image"/>
         <!--name ： 类中的属性名
         class : 类名
         column : 外键的名称-->

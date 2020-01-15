@@ -14,10 +14,19 @@ public class Customer {
 
     private String cust_phone;
     private String cust_mobile;
+    private String cust_image; //客户资质图片
 
     private BaseDict baseDictSource;
     private BaseDict baseDictIndustry;
     private BaseDict baseDictLevel;
+
+    public String getCust_image() {
+        return cust_image;
+    }
+
+    public void setCust_image(String cust_image) {
+        this.cust_image = cust_image;
+    }
 
     public BaseDict getBaseDictSource() {
         return baseDictSource;

@@ -3,10 +3,15 @@ package com.itheima.crm.web.action;
 import com.itheima.crm.domain.Customer;
 import com.itheima.crm.domain.PageBean;
 import com.itheima.crm.service.CustomerService;
+import com.itheima.crm.utils.UploadUtils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import org.apache.commons.io.FileUtils;
 import org.hibernate.criterion.DetachedCriteria;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * 客户管理的action
@@ -43,14 +48,59 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
         }
         this.pageSize = pageSize;
     }
+    /**
+     * 文件上传提供的三个属性  <input type="file" name="upload"/>
+     * 字符串类型   上传项名称 + FileName;
+     * file类型    上传项名称
+     * 字符串类型   上传项名称 + ContentType
+     */
+    private String uploadFileName; //文件名称
+    private File upload;            //上传文件
+    private String uploadContentType; //文件类型
 
+    public void setUploadFileName(String uploadFileName) {
+        this.uploadFileName = uploadFileName;
+    }
+
+    public void setUpload(File upload) {
+        this.upload = upload;
+    }
+
+    public void setUploadContentType(String uploadContentType) {
+        this.uploadContentType = uploadContentType;
+    }
 
     /**
      * 保存客户
      */
-    public String save(){
+    public String save() throws IOException {
+        //上传文件
+        if (upload !=null){
+            //说明选择了文件，进行文件的上传
+            //设置文件上传的路径
+            String path = "C:/upload";
+            //一个目录下存放的相同文件名 ： 随机文件名
+            String uuidFileName = UploadUtils.getUuitFileName(uploadFileName);
+
+            //一个目录下存放的文件过多 : 文件分离
+            String realPath = UploadUtils.getPath(uuidFileName);
+            String url = path+realPath;
+            //创建目录
+            File file = new File(url);
+            if (!file.exists()){
+                //如果目录不存在，新建
+                file.mkdirs();
+            }
+            //文件上传
+            File dictFile = new File(url+"/"+uuidFileName);
+            FileUtils.copyFile(upload,dictFile);
+
+            //设置image的属性的值
+            customer.setCust_image(url+"/"+uuidFileName);
+        }
+        //保存客户
         customerService.save(customer);
-        return "list";
+        return "saveSuccess";
     }
 
     /**
@@ -71,5 +121,35 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 
         ActionContext.getContext().getValueStack().push(pageBean);
         return "findAll";
+    }
+    /**
+     * 删除客户
+     */
+    public String delete(){
+        //先查询，再删除
+        customer = customerService.findById(customer.getCust_id());
+        //删除图片
+        if (customer.getCust_image() != null){
+            File file = new File(customer.getCust_image());
+            if (file.exists()){
+                file.delete();
+            }
+        }
+        //删除客户
+        customerService.delete(customer);
+        return "deleteSuccess";
+    }
+
+    /**
+     * 编辑客户的方法
+     */
+    public String edit(){
+        //根据id查询数据，然后回显到界面
+        customer = customerService.findById(customer.getCust_id());
+        //将customer传递到界面 两种方式，一：手动压栈，二种，不用管他，因为模型驱动的对象，默认在值栈里
+        //如果使用第一种，回显数据的时候，<s:property value="cust_name"/>
+        //如果使用第二种，回显数据的时候，<s:property value="model.cust_name"/>
+        //ActionContext.getContext().getValueStack().push(customer);
+        return "editSuccess";
     }
 }
