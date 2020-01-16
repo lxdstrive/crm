@@ -48,6 +48,7 @@ CREATE TABLE `cst_customer` (
   `cust_level` varchar(32) DEFAULT NULL COMMENT '客户级别',
   `cust_phone` varchar(64) DEFAULT NULL COMMENT '固定电话',
   `cust_mobile` varchar(16) DEFAULT NULL COMMENT '移动电话',
+  `cust_image` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`cust_id`),
   KEY `FKeh5g36duab8g1h051pdjfwcgd` (`cust_source`),
   KEY `FK2xhr3arwp3tkuae1da4lqv352` (`cust_industry`),
@@ -58,11 +59,36 @@ CREATE TABLE `cst_customer` (
   CONSTRAINT `FK_cst_customer_0003` FOREIGN KEY (`cust_level`) REFERENCES `base_dict` (`dict_id`),
   CONSTRAINT `FKeh5g36duab8g1h051pdjfwcgd` FOREIGN KEY (`cust_source`) REFERENCES `base_dict` (`dict_id`),
   CONSTRAINT `FKrty52nvbjg1echf0se39eng49` FOREIGN KEY (`cust_level`) REFERENCES `base_dict` (`dict_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 /*Data for the table `cst_customer` */
 
-insert  into `cst_customer`(`cust_id`,`cust_name`,`cust_source`,`cust_industry`,`cust_level`,`cust_phone`,`cust_mobile`) values (1,'侯亚敏','6','1','22','15626','2542266'),(2,'小红','6','2','22','12124','1254'),(3,'小绿','6','2','23','12423','35214424'),(4,'小芳','6','2','23','3543635','32453245'),(5,'张爱霞','7','3','23','23521','54634'),(6,'神兽','7','3','23','3235234','43263245'),(7,'是德国','6','3','22','334234','2345234');
+insert  into `cst_customer`(`cust_id`,`cust_name`,`cust_source`,`cust_industry`,`cust_level`,`cust_phone`,`cust_mobile`,`cust_image`) values (1,'侯亚敏','6','1','22','15626','2542266',NULL),(2,'小红','6','2','22','12124','1254',NULL),(3,'小绿','6','2','23','12423','35214424',NULL),(4,'小芳','6','2','23','3543635','32453245',NULL),(5,'张爱霞','7','3','23','23521','54634',NULL),(6,'神兽','7','3','23','3235234','43263245',NULL),(7,'是德国','6','3','22','334234','2345234',NULL),(8,'亚历山大老鹰','7','2','23','233452','23423424',NULL),(10,'高度风格化','6','1','22','545462','2345645','C:/upload/5/0/9bbba552312046fcb06d40bbd16b115a.jpg'),(12,'哆啦改变','6','2','22','1561','1414','C:/upload/9/0/9f56e238bbaa42809d39db6618c4771b.png');
+
+/*Table structure for table `cst_linkman` */
+
+DROP TABLE IF EXISTS `cst_linkman`;
+
+CREATE TABLE `cst_linkman` (
+  `lkm_id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '联系人编号(主键)',
+  `lkm_name` varchar(16) DEFAULT NULL COMMENT '联系人姓名',
+  `lkm_cust_id` bigint(32) DEFAULT NULL COMMENT '客户id',
+  `lkm_gender` char(1) DEFAULT NULL COMMENT '联系人性别',
+  `lkm_phone` varchar(16) DEFAULT NULL COMMENT '联系人办公电话',
+  `lkm_mobile` varchar(16) DEFAULT NULL COMMENT '联系人手机',
+  `lkm_email` varchar(64) DEFAULT NULL COMMENT '联系人邮箱',
+  `lkm_qq` varchar(16) DEFAULT NULL COMMENT '联系人qq',
+  `lkm_position` varchar(16) DEFAULT NULL COMMENT '联系人职位',
+  `lkm_memo` varchar(512) DEFAULT NULL COMMENT '联系人备注',
+  PRIMARY KEY (`lkm_id`),
+  KEY `FK_cst_linkman_lkm_cust_id` (`lkm_cust_id`),
+  CONSTRAINT `FK_cst_linkman_lkm_cust_id` FOREIGN KEY (`lkm_cust_id`) REFERENCES `cst_customer` (`cust_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FKh9yp1nql5227xxcopuxqx2e7q` FOREIGN KEY (`lkm_cust_id`) REFERENCES `cst_customer` (`cust_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+/*Data for the table `cst_linkman` */
+
+insert  into `cst_linkman`(`lkm_id`,`lkm_name`,`lkm_cust_id`,`lkm_gender`,`lkm_phone`,`lkm_mobile`,`lkm_email`,`lkm_qq`,`lkm_position`,`lkm_memo`) values (1,'小凤',1,'女','15625','445654','nb@l63.com','423423532','总管',NULL),(2,'如花',1,'男','3232','34235','lxdstrive@163.com','4343434','经理',NULL),(3,'丹方',5,'女','45','346','3245','3423',NULL,NULL),(4,'是个',5,'男','4453','3456','345345gsha','43453',NULL,NULL),(5,'梵蒂冈',3,'女','434','434','45fgdg','534',NULL,NULL);
 
 /*Table structure for table `sys_user` */
 
