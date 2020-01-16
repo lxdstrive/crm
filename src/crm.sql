@@ -84,11 +84,11 @@ CREATE TABLE `cst_linkman` (
   KEY `FK_cst_linkman_lkm_cust_id` (`lkm_cust_id`),
   CONSTRAINT `FK_cst_linkman_lkm_cust_id` FOREIGN KEY (`lkm_cust_id`) REFERENCES `cst_customer` (`cust_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FKh9yp1nql5227xxcopuxqx2e7q` FOREIGN KEY (`lkm_cust_id`) REFERENCES `cst_customer` (`cust_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 /*Data for the table `cst_linkman` */
 
-insert  into `cst_linkman`(`lkm_id`,`lkm_name`,`lkm_cust_id`,`lkm_gender`,`lkm_phone`,`lkm_mobile`,`lkm_email`,`lkm_qq`,`lkm_position`,`lkm_memo`) values (1,'小凤',1,'女','15625','445654','nb@l63.com','423423532','总管',NULL),(2,'如花',1,'男','3232','34235','lxdstrive@163.com','4343434','经理',NULL),(3,'丹方',5,'女','45','346','3245','3423',NULL,NULL),(4,'是个',5,'男','4453','3456','345345gsha','43453',NULL,NULL),(5,'梵蒂冈',3,'女','434','434','45fgdg','534',NULL,NULL);
+insert  into `cst_linkman`(`lkm_id`,`lkm_name`,`lkm_cust_id`,`lkm_gender`,`lkm_phone`,`lkm_mobile`,`lkm_email`,`lkm_qq`,`lkm_position`,`lkm_memo`) values (1,'小凤',1,'2','15625','445654','nb@l63.com','423423532','总管',NULL),(2,'大如花',2,'1','3232','34235','lxdstrive@163.com','4343434','经理','第三方'),(3,'丹方',5,'2','45','346','3245','3423',NULL,NULL),(4,'是个',5,'1','4453','3456','345345gsha','43453',NULL,NULL),(5,'梵蒂冈',3,'2','434','434','45fgdg','534',NULL,NULL),(6,'小小后压敏',1,'2','25545','34532','45342@qq.com','34523425','经理',''),(7,'如花',1,'1','3232','34235','lxdstrive@163.com','4343434','经理','娶你的'),(8,'如花',1,'1','3232','34235','lxdstrive@163.com','4343434','经理','娶你的');
 
 /*Table structure for table `sys_user` */
 
