@@ -1,4 +1,5 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -13,10 +14,7 @@
 <META content="MSHTML 6.00.2900.3492" name=GENERATOR>
 </HEAD>
 <BODY>
-	<FORM id=form1 name=form1
-		action="${pageContext.request.contextPath }/linkmanServlet?method=addsubmit"
-		method=post>
-		
+	<s:form id="form1" name="form1" action="linkMan_save.action" namespace="/" method="POST" theme="simple">
 
 		<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
 			<TBODY>
@@ -47,7 +45,10 @@
 						<TABLE cellSpacing=0 cellPadding=5  border=0>
 							<tr>
 								<td>所属客户：</td>
-								<td colspan="3"><input type="text" name="custId" style="WIDTH: 180px"/></td>
+								<s:select list="list" name="customer.cust_id" headerKey="" headerValue="-请选择-"
+								listKey="" listValue="">
+
+								</s:select>
 							</tr>
 							<TR>
 								<td>联系人名称：</td>
@@ -68,6 +69,30 @@
 														style="WIDTH: 180px" maxLength=50 name="lkmPhone">
 								</td>
 								<td>联系人手机 ：</td>
+								<td>
+								<INPUT class=textbox id=sChannel2
+														style="WIDTH: 180px" maxLength=50 name="lkmMobile">
+								</td>
+							</TR>
+							<TR>
+								<td>联系人邮箱 ：</td>
+								<td>
+								<INPUT class=textbox id=sChannel2
+														style="WIDTH: 180px" maxLength=50 name="lkmPhone">
+								</td>
+								<td>联系人QQ ：</td>
+								<td>
+								<INPUT class=textbox id=sChannel2
+														style="WIDTH: 180px" maxLength=50 name="lkmMobile">
+								</td>
+							</TR>
+							<TR>
+								<td>联系人职位 ：</td>
+								<td>
+								<INPUT class=textbox id=sChannel2
+														style="WIDTH: 180px" maxLength=50 name="lkmPhone">
+								</td>
+								<td>联系人备注 ：</td>
 								<td>
 								<INPUT class=textbox id=sChannel2
 														style="WIDTH: 180px" maxLength=50 name="lkmMobile">
@@ -100,6 +125,6 @@
 				</TR>
 			</TBODY>
 		</TABLE>
-	</FORM>
+	</s:form>
 </BODY>
 </HTML>

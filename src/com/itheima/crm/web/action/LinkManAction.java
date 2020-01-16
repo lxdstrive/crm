@@ -1,12 +1,16 @@
 package com.itheima.crm.web.action;
 
+import com.itheima.crm.domain.Customer;
 import com.itheima.crm.domain.LinkMan;
 import com.itheima.crm.domain.PageBean;
+import com.itheima.crm.service.CustomerService;
 import com.itheima.crm.service.LinkManService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import org.hibernate.criterion.DetachedCriteria;
+
+import java.util.List;
 
 /**
  * @author BJXT-LXD
@@ -23,6 +27,13 @@ public class LinkManAction extends ActionSupport implements ModelDriven<LinkMan>
     public void setLinkManService(LinkManService linkManService) {
         this.linkManService = linkManService;
     }
+    //注入客户管理的service
+    private CustomerService customerService;
+
+    public void setCustomerService(CustomerService customerService) {
+        this.customerService = customerService;
+    }
+
     //分页参数
     private Integer currPage = 1;//当前页
     private Integer pageSize = 3;//每页显示的条数
@@ -52,5 +63,16 @@ public class LinkManAction extends ActionSupport implements ModelDriven<LinkMan>
         PageBean<LinkMan> pageBean = linkManService.findAll(detachedCriteria,currPage,pageSize);
         ActionContext.getContext().getValueStack().push(pageBean);
         return "findAll";
+    }
+
+    /**
+     * 跳转到添加页面的方法saveUI
+     * @return
+     */
+    public String saveUI(){
+        //查询所有客户
+        List<Customer> list = customerService.findAll();
+        ActionContext.getContext().getValueStack().set("list",list);
+        return "saveUI";
     }
 }

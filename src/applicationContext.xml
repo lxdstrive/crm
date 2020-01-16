@@ -97,6 +97,7 @@
     </bean>
     <bean id="linkManAction" class="com.itheima.crm.web.action.LinkManAction">
         <property name="linkManService" ref="linkManService"/>
+        <property name="customerService" ref="customerService"/>
     </bean>
 
 
