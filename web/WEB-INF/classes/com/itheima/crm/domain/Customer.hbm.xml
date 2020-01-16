@@ -12,11 +12,17 @@
 <!--        <property name="cust_industry" column="cust_industry"/>-->
         <property name="cust_phone" column="cust_phone"/>
         <property name="cust_mobile" column="cust_mobile"/>
+        <property name="cust_image" column="cust_image"/>
         <!--name ： 类中的属性名
         class : 类名
         column : 外键的名称-->
         <many-to-one name="baseDictSource" class="com.itheima.crm.domain.BaseDict" column="cust_source"/>
         <many-to-one name="baseDictIndustry" class="com.itheima.crm.domain.BaseDict" column="cust_industry"/>
         <many-to-one name="baseDictLevel" class="com.itheima.crm.domain.BaseDict" column="cust_level"/>
+
+        <set name="linkMans">
+            <key column="lkm_cust_id"/>
+            <one-to-many class="com.itheima.crm.domain.LinkMan"/>
+        </set>
     </class>
 </hibernate-mapping>

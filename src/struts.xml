@@ -28,8 +28,11 @@
                 <param name="fileUpload.allowedExtensions">.jpg,.bmp,.png</param>
             </interceptor-ref>
         </action>
-        <action name="baseDict_*" class="baseDictAction" method="{1}">
+        <action name="baseDict_*" class="baseDictAction" method="{1}"></action>
 
+        <action name="linkMan_*" class="linkManAction" method="{1}">
+            <result name="findAll">/jsp/linkman/list.jsp</result>
         </action>
+
     </package>
 </struts>

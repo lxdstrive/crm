@@ -1,5 +1,8 @@
 package com.itheima.crm.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * 客户管理的实体类
  * @author BJXT-LXD
@@ -19,6 +22,16 @@ public class Customer {
     private BaseDict baseDictSource;
     private BaseDict baseDictIndustry;
     private BaseDict baseDictLevel;
+
+    private Set<LinkMan> linkMans = new HashSet<>();
+
+    public Set<LinkMan> getLinkMans() {
+        return linkMans;
+    }
+
+    public void setLinkMans(Set<LinkMan> linkMans) {
+        this.linkMans = linkMans;
+    }
 
     public String getCust_image() {
         return cust_image;

@@ -6,6 +6,8 @@
 
 <struts>
     <constant name="struts.action.extension" value="action"/>
+<!--    配置struts2中文件上传的总大小-->
+    <constant name="struts.multipart.maxSize" value="5242880"/>
     <package name="crm" extends="struts-default" namespace="/">
         <action name="user_*" class="userAction" method="{1}">
             <result name="login">login.jsp</result>
@@ -14,10 +16,23 @@
         <action name="customer_*" class="customerAction" method="{1}">
             <result name="saveUI">/jsp/customer/add.jsp</result>
             <result name="findAll">/jsp/customer/list.jsp</result>
-            <result name="list" type="redirectAction">customer_findAll.action</result>
-        </action>
-        <action name="baseDict_*" class="baseDictAction" method="{1}">
+            <result name="saveSuccess" type="redirectAction">customer_findAll.action</result>
+            <result name="deleteSuccess" type="redirectAction">customer_findAll.action</result>
+            <result name="editSuccess">/jsp/customer/edit.jsp</result>
+            <result name="updateSuccess" type="redirectAction">customer_findAll.action</result>
+            <result name="input">/jsp/customer/add.jsp</result>
 
+            
+            <interceptor-ref name="defaultStack">
+                <param name="fileUpload.maximumSize">2097152</param>
+                <param name="fileUpload.allowedExtensions">.jpg,.bmp,.png</param>
+            </interceptor-ref>
         </action>
+        <action name="baseDict_*" class="baseDictAction" method="{1}"></action>
+
+        <action name="linkMan_*" class="linkManAction" method="{1}">
+            <result name="findAll">/jsp/linkman/list.jsp</result>
+        </action>
+
     </package>
 </struts>
