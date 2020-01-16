@@ -33,6 +33,9 @@
         <action name="linkMan_*" class="linkManAction" method="{1}">
             <result name="findAll">/jsp/linkman/list.jsp</result>
             <result name="saveUI">/jsp/linkman/add.jsp</result>
+            <result name="editSuccess">/jsp/linkman/edit.jsp</result>
+            <result type="redirectAction" name="saveSuccess">linkMan_findAll.action</result>
+            <result type="redirectAction" name="updateSuccess">linkMan_findAll.action</result>
         </action>
 
     </package>

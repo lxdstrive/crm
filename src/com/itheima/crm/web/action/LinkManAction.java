@@ -75,4 +75,35 @@ public class LinkManAction extends ActionSupport implements ModelDriven<LinkMan>
         ActionContext.getContext().getValueStack().set("list",list);
         return "saveUI";
     }
+
+    /**
+     * 保存联系人
+     */
+    public String save(){
+        linkManService.save(linkMan);
+        return "saveSuccess";
+    }
+
+    /**
+     * 编辑联系人，跳转到编辑页面的方法
+     */
+    public String edit(){
+        //查询某个联系人，查询所有客户
+        List<Customer> list = customerService.findAll();
+        linkMan = linkManService.findById(linkMan.getLkm_id());
+        //将list和linkMan带到页面上
+        ActionContext.getContext().getValueStack().set("list",list);
+        //将对象的值也存入值栈
+        ActionContext.getContext().getValueStack().push(linkMan);
+        return "editSuccess";
+    }
+
+    /**
+     * 修改联系人的方法
+     */
+    public String update(){
+        //调用业务层方法
+        linkManService.update(linkMan);
+        return "updateSuccess";
+    }
 }
