@@ -8,8 +8,13 @@ import java.util.List;
 /**
  * @author BJXT-LXD
  */
-public interface LinkManDao {
+public interface LinkManDao extends BaseDao<LinkMan> {
     Integer findCount(DetachedCriteria detachedCriteria);
 
     List<LinkMan> findByPage(DetachedCriteria detachedCriteria, Integer begin, Integer pageSize);
+
+
+
+    LinkMan findById(Long lkm_id);
+
 }

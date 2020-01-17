@@ -46,4 +46,33 @@ public class LinkManServiceImpl implements LinkManService {
         pageBean.setList(linkMans);
         return pageBean;
     }
+
+    /**
+     * 保存联系人
+     * @param linkMan
+     */
+    @Override
+    public void save(LinkMan linkMan) {
+        linkManDao.save(linkMan);
+    }
+
+    @Override
+    public LinkMan findById(Long lkm_id) {
+
+        return linkManDao.findById(lkm_id);
+    }
+
+    /**
+     * 修改联系人
+     * @param linkMan
+     */
+    @Override
+    public void update(LinkMan linkMan) {
+        linkManDao.update(linkMan);
+    }
+
+    @Override
+    public void delete(LinkMan linkMan) {
+        linkManDao.delete(linkMan);
+    }
 }
