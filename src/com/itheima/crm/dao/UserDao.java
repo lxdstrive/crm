@@ -7,8 +7,7 @@ import com.itheima.crm.domain.User;
  * @date 2020/1/11 19:03
  * @description
  */
-public interface UserDao {
-    void save(User user);
+public interface UserDao extends BaseDao<User>{
 
     User login(User user);
 }

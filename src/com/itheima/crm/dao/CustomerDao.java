@@ -1,9 +1,6 @@
 package com.itheima.crm.dao;
 
 import com.itheima.crm.domain.Customer;
-import org.hibernate.criterion.DetachedCriteria;
-
-import java.util.List;
 
 /**
  * 客户管理的dao接口
@@ -11,11 +8,4 @@ import java.util.List;
  */
 public interface CustomerDao extends BaseDao<Customer>{
 
-    Integer findCount(DetachedCriteria detachedCriteria);
-
-    List<Customer> findByPage(DetachedCriteria detachedCriteria, Integer begin, Integer pageSize);
-
-    Customer findById(Long cust_id);
-
-    List<Customer> findAll();
 }
