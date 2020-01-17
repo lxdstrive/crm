@@ -9,6 +9,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
 
@@ -60,6 +61,15 @@ public class LinkManAction extends ActionSupport implements ModelDriven<LinkMan>
         //创建离线条件查询
         DetachedCriteria detachedCriteria = DetachedCriteria.forClass(LinkMan.class);
 
+        //添加条件
+        //按名称查询
+        if (linkMan.getLkm_name()!=null){
+            detachedCriteria.add(Restrictions.like("lkm_name","%"+linkMan.getLkm_name()+"%"));
+        }
+        //按性别查询
+        if (linkMan.getLkm_gender()!=null&& !"".equals(linkMan.getLkm_gender())){
+            detachedCriteria.add(Restrictions.eq("lkm_gender",linkMan.getLkm_gender()));
+        }
         PageBean<LinkMan> pageBean = linkManService.findAll(detachedCriteria,currPage,pageSize);
         ActionContext.getContext().getValueStack().push(pageBean);
         return "findAll";
@@ -77,33 +87,37 @@ public class LinkManAction extends ActionSupport implements ModelDriven<LinkMan>
     }
 
     /**
-     * 保存联系人
+     *保存联系人
      */
     public String save(){
         linkManService.save(linkMan);
         return "saveSuccess";
     }
-
     /**
-     * 编辑联系人，跳转到编辑页面的方法
+     * 编辑联系人
      */
     public String edit(){
-        //查询某个联系人，查询所有客户
+        //查询所有客户
         List<Customer> list = customerService.findAll();
-        linkMan = linkManService.findById(linkMan.getLkm_id());
-        //将list和linkMan带到页面上
         ActionContext.getContext().getValueStack().set("list",list);
-        //将对象的值也存入值栈
+        linkMan = linkManService.findById(linkMan.getLkm_id());
+
         ActionContext.getContext().getValueStack().push(linkMan);
         return "editSuccess";
     }
-
     /**
-     * 修改联系人的方法
+     * 修改联系人
      */
     public String update(){
-        //调用业务层方法
         linkManService.update(linkMan);
         return "updateSuccess";
+    }
+    /**
+     * 删除联系人
+     */
+    public String delete(){
+        linkMan = linkManService.findById(linkMan.getLkm_id());
+        linkManService.delete(linkMan);
+        return "deleteSuccess";
     }
 }

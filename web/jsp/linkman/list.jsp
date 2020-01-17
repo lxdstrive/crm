@@ -23,10 +23,9 @@
     <META content="MSHTML 6.00.2900.3492" name=GENERATOR>
 </HEAD>
 <BODY>
-<FORM id="customerForm" name="customerForm"
-      action="${pageContext.request.contextPath }/linkMan_findAll.action"
-      method=post>
 
+<s:form id="customerForm" name="customerForm" action="linkMan_findAll.action" namespace="/" method="POST"
+        theme="simple">
     <TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
         <TBODY>
         <TR>
@@ -62,8 +61,16 @@
                                 <TBODY>
                                 <TR>
                                     <TD>联系人名称：</TD>
-                                    <TD><INPUT class=textbox id=sChannel2
-                                               style="WIDTH: 80px" maxLength=50 name="lkmName"></TD>
+                                    <TD>
+                                        <s:textfield cssClass="textbox" cssStyle="WIDTH: 80px" maxLength="50"
+                                                     name="lkm_name"/>
+                                    </TD>
+
+                                    <TD>联系人性别：</TD>
+                                    <TD>
+                                        <s:select list="#{'1':'男','2':'女'}" name="lkm_gender" headerKey=""
+                                                  headerValue="-请选择-"/>
+                                    </TD>
 
                                     <TD><INPUT class=button id=sButton2 type=submit
                                                value=" 筛选 " name=sButton2></TD>
@@ -92,10 +99,10 @@
                                     <TD>操作</TD>
                                 </TR>
                                 <s:iterator value="list">
-                                    <TR
-                                            style="FONT-WEIGHT: normal; FONT-STYLE: normal; BACKGROUND-COLOR: white; TEXT-DECORATION: none">
+                                    <TR style="FONT-WEIGHT: normal; FONT-STYLE: normal; BACKGROUND-COLOR: white; TEXT-DECORATION: none">
                                         <TD><s:property value="lkm_name"/></TD>
-                                        <TD><s:if test='lkm_gender=="1"'>男</s:if><s:elseif test='lkm_gender =="2"'>女</s:elseif></TD>
+                                        <TD><s:if test='lkm_gender == "1"'>男</s:if>
+                                            <s:elseif test='lkm_gender =="2"'>女</s:elseif></TD>
                                         <TD><s:property value="lkm_phone"/></TD>
                                         <TD><s:property value="lkm_mobile"/></TD>
                                         <TD><s:property value="lkm_email"/></TD>
@@ -105,8 +112,7 @@
 
                                         <TD>
                                             <a href="${pageContext.request.contextPath }/linkMan_edit.action?lkm_id=<s:property value="lkm_id"/>">修改</a>
-                                            &nbsp;&nbsp;
-                                            <a href="${pageContext.request.contextPath }/">删除</a>
+                                            <a href="${pageContext.request.contextPath }/linkMan_delete.action?lkm_id=<s:property value="lkm_id"/>">删除</a>
                                         </TD>
                                     </TR>
                                 </s:iterator>
@@ -119,39 +125,46 @@
                     <TR>
                         <TD><SPAN id=pagelink>
 											<DIV
-                                                    style="LINE-HEIGHT: 20px; HEIGHT: 20px; TEXT-ALIGN: right">
-												共[<B><s:property value="totalCount"/></B>]条记录,[<B><s:property
+                                                    style=" LINE-HEIGHT: 20px; HEIGHT: 20px; TEXT-ALIGN: right">
+                                        共[<B><s:property value="totalCount"/></B>]条记录,[<B><s:property
                                                     value="totalPage"/></B>]页
-												,每页显示
-												<select name="pageSize" onchange="to_page()">
-                                                    <option <s:if test="pageSize==3">selected</s:if> value="3">3</option>
-                                                    <option <s:if test="pageSize==5">selected</s:if> value="5">5</option>
-												    <option <s:if test="pageSize==10">selected</s:if> value="10">10</option>
-												</select>条
-                                                <s:if test="currPage != 1">
-                                                    [<A href="javascript:to_page(1)">首页</A>]
-                                                    [<A href="javascript:to_page(<s:property value="currPage-1"/>)">前一页</A>]
-                                                </s:if>
-												<B>
-                                                    <s:iterator var="i" begin="1" end="totalPage">
-                                                        <s:if test="#i == currPage"><s:property value="#i"/> </s:if>
-                                                        <s:else>
-                                                            <a href="javascript:to_page(<s:property value="#i"/>)"><s:property value="#i"/></a>
-                                                        </s:else>
-                                                    </s:iterator>
-                                                </B>
-                                                <s:if test="currPage != totalPage">
-                                                    [<A href="javascript:to_page(<s:property value="currPage+1"/>)">后一页</A>]
-                                                    [<A href="javascript:to_page(<s:property
-                                                        value="totalPage"/> )">尾页</A>]
-                                                </s:if>
-												到
-												<input type="text" size="3" id="page" name="currPage"/>
-												页
-												
-												<input type="button" value="Go" onclick="to_page()"/>
-											</DIV>
-									</SPAN></TD>
+                                        ,每页显示
+                                        <select name="pageSize" onchange="to_page()">
+                                            <option
+                                                    <s:if test="pageSize==3">selected</s:if> value="3">3
+                                            </option>
+                                            <option
+                                                    <s:if test="pageSize==5">selected</s:if> value="5">5
+                                            </option>
+                                            <option
+                                                    <s:if test="pageSize==10">selected</s:if> value="10">10
+                                            </option>
+                                        </select>条
+                                        <s:if test="currPage != 1">
+                                            [<A href="javascript:to_page(1)">首页</A>]
+                                            [<A href="javascript:to_page(<s:property value="currPage-1"/>)">前一页</A>]
+                                        </s:if>
+                                        <B>
+                                            <s:iterator var="i" begin="1" end="totalPage">
+                                                <s:if test="#i == currPage"><s:property value="#i"/> </s:if>
+                                                <s:else>
+                                                    <a href="javascript:to_page(<s:property value="#i"/>)"><s:property
+                                                            value="#i"/></a>
+                                                </s:else>
+                                            </s:iterator>
+                                        </B>
+                                        <s:if test="currPage != totalPage">
+                                            [<A href="javascript:to_page(<s:property value="currPage+1"/>)">后一页</A>]
+                                            [<A href="javascript:to_page(<s:property
+                                                value="totalPage"/> )">尾页</A>]
+                                        </s:if>
+                                        到
+                                        <input type="text" size="3" id="page" name="currPage"/>
+                                        页
+
+                                        <input type="button" value="Go" onclick="to_page()"/>
+                                        </DIV>
+                                        </SPAN></TD>
                     </TR>
                     </TBODY>
                 </TABLE>
@@ -173,6 +186,7 @@
         </TR>
         </TBODY>
     </TABLE>
-</FORM>
+</s:form>
+
 </BODY>
 </HTML>

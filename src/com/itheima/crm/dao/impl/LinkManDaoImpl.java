@@ -4,14 +4,13 @@ import com.itheima.crm.dao.LinkManDao;
 import com.itheima.crm.domain.LinkMan;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
-import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import java.util.List;
 
 /**
  * @author BJXT-LXD
  */
-public class LinkManDaoImpl extends HibernateDaoSupport implements LinkManDao {
+public class LinkManDaoImpl extends BaseDaoImpl<LinkMan> implements LinkManDao {
 
     @Override
     public Integer findCount(DetachedCriteria detachedCriteria) {
@@ -32,17 +31,8 @@ public class LinkManDaoImpl extends HibernateDaoSupport implements LinkManDao {
     }
 
     @Override
-    public void save(LinkMan linkMan) {
-        this.getHibernateTemplate().save(linkMan);
-    }
-
-    @Override
     public LinkMan findById(Long lkm_id) {
         return this.getHibernateTemplate().get(LinkMan.class,lkm_id);
     }
 
-    @Override
-    public void update(LinkMan linkMan) {
-        this.getHibernateTemplate().update(linkMan);
-    }
 }

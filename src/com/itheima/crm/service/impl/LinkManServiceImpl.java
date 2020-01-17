@@ -56,12 +56,9 @@ public class LinkManServiceImpl implements LinkManService {
         linkManDao.save(linkMan);
     }
 
-    /**
-     * 根据联系人id查询联系人
-     */
-
     @Override
     public LinkMan findById(Long lkm_id) {
+
         return linkManDao.findById(lkm_id);
     }
 
@@ -72,5 +69,10 @@ public class LinkManServiceImpl implements LinkManService {
     @Override
     public void update(LinkMan linkMan) {
         linkManDao.update(linkMan);
+    }
+
+    @Override
+    public void delete(LinkMan linkMan) {
+        linkManDao.delete(linkMan);
     }
 }

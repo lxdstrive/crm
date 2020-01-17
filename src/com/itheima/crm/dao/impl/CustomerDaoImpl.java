@@ -4,7 +4,6 @@ import com.itheima.crm.dao.CustomerDao;
 import com.itheima.crm.domain.Customer;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
-import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import java.util.List;
 
@@ -12,15 +11,7 @@ import java.util.List;
  * 客户管理的dao接口的实现类
  * @author BJXT-LXD
  */
-public class CustomerDaoImpl extends HibernateDaoSupport implements CustomerDao {
-    /**
-     * 保存客户
-     * @param customer
-     */
-    @Override
-    public void save(Customer customer) {
-        this.getHibernateTemplate().save(customer);
-    }
+public class CustomerDaoImpl extends BaseDaoImpl<Customer> implements CustomerDao {
 
     /**
      * dao中带条件统计个数的方法
@@ -63,24 +54,6 @@ public class CustomerDaoImpl extends HibernateDaoSupport implements CustomerDao 
     }
 
     /**
-     * 删除客户
-     * @param customer
-     */
-    @Override
-    public void delete(Customer customer) {
-        this.getHibernateTemplate().delete(customer);
-    }
-
-    /**
-     * 修改客户
-     * @param customer
-     */
-    @Override
-    public void update(Customer customer) {
-        this.getHibernateTemplate().update(customer);
-    }
-
-    /**
      * 查询所有客户
      * @return
      */
@@ -89,4 +62,5 @@ public class CustomerDaoImpl extends HibernateDaoSupport implements CustomerDao 
 
         return (List<Customer>) this.getHibernateTemplate().find("from Customer");
     }
+
 }
