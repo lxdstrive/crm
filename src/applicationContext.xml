@@ -43,6 +43,7 @@
                 <value>com/itheima/crm/domain/Customer.hbm.xml</value>
                 <value>com/itheima/crm/domain/BaseDict.hbm.xml</value>
                 <value>com/itheima/crm/domain/LinkMan.hbm.xml</value>
+                <value>com/itheima/crm/domain/SaleVisit.hbm.xml</value>
             </list>
         </property>
     </bean>
@@ -98,6 +99,16 @@
     <bean id="linkManAction" class="com.itheima.crm.web.action.LinkManAction">
         <property name="linkManService" ref="linkManService"/>
         <property name="customerService" ref="customerService"/>
+    </bean>
+    <!--    配置客户拜访相关的类-->
+    <bean id="saleVisitDao" class="com.itheima.crm.dao.impl.SaleVisitDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="saleVisitService" class="com.itheima.crm.service.impl.SaleVisitServiceImpl">
+        <property name="saleVisitDao" ref="saleVisitDao"/>
+    </bean>
+    <bean id="saleVisitAction" class="com.itheima.crm.web.action.SaleVisitAction">
+        <property name="saleVisitService" ref="saleVisitService"/>
     </bean>
 
 

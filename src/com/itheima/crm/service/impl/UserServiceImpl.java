@@ -6,6 +6,8 @@ import com.itheima.crm.service.UserService;
 import com.itheima.crm.utils.MD5Utils;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * @author lxd
  * @date 2020/1/11 19:07
@@ -38,5 +40,10 @@ public class UserServiceImpl implements UserService {
         user.setUser_password(MD5Utils.md5(user.getUser_password()));
 
         return userDao.login(user);
+    }
+
+    @Override
+    public List<User> findAllUser() {
+        return userDao.findAll();
     }
 }

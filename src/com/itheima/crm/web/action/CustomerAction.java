@@ -7,12 +7,16 @@ import com.itheima.crm.utils.UploadUtils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import net.sf.json.JSONArray;
+import net.sf.json.JsonConfig;
 import org.apache.commons.io.FileUtils;
+import org.apache.struts2.ServletActionContext;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * 客户管理的action
@@ -220,5 +224,24 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
         }
         customerService.update(customer);
         return "updateSuccess";
+    }
+
+    /**
+     * 查询所有客户
+     */
+    public String findAllCustomer() throws IOException {
+        List<Customer> list = customerService.findAll();
+
+        JsonConfig jsonConfig = new JsonConfig();
+        //jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+        jsonConfig.setExcludes(new String[]{"cust_phone","cust_mobile","cust_image","baseDictSource","baseDictIndustry",
+        "baseDictLevel","linkMans"});
+        JSONArray jsonArray = JSONArray.fromObject(list,jsonConfig);
+//        System.out.println(jsonArray.toString());
+        //将json打印到界面上
+        ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
+        ServletActionContext.getResponse().getWriter().println(jsonArray.toString());
+
+        return NONE;
     }
 }

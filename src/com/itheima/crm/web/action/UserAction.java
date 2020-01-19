@@ -5,6 +5,12 @@ import com.itheima.crm.service.UserService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import net.sf.json.JSONArray;
+import net.sf.json.JsonConfig;
+import org.apache.struts2.ServletActionContext;
+
+import java.io.IOException;
+import java.util.List;
 
 /**
  * 用户管理的action的类
@@ -47,4 +53,18 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
             return SUCCESS;
         }
     }
+
+    public String findAllUser() throws IOException {
+        List<User> users = userService.findAllUser();
+
+        JsonConfig jsonConfig= new JsonConfig();
+        jsonConfig.setExcludes(new String[]{"user_code","user_password","user_state"});
+
+        JSONArray jsonArray = JSONArray.fromObject(users,jsonConfig);
+
+        ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
+        ServletActionContext.getResponse().getWriter().println(jsonArray.toString());
+        return NONE;
+    }
+
 }

@@ -110,6 +110,8 @@ public class LinkManAction extends ActionSupport implements ModelDriven<LinkMan>
      */
     public String update(){
         linkManService.update(linkMan);
+        linkMan.setLkm_name(null);
+        linkMan.setLkm_gender(null);
         return "updateSuccess";
     }
     /**
